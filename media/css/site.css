@@ -1,37 +1,98 @@
-body {
-    font-family: 'Arial';
-    font-size: 16pt;
-}
-
-h1, h2, h3 {
-    font-family: 'Rubik';
-}
-
-h1 {
+#catender-config {
+    position: absolute;
+    top: 12px;
+    right: 12px;
     font-size: 300%;
+    opacity: 0.25;
+    z-index: 1;
+    transition: opacity 0.5s ease-in 0s;
 }
 
-h2 {
+#catender-config:hover {
+    cursor: pointer;
+    opacity: 1;
+    -webkit-animation: fa-spin 3s infinite linear;
+    -moz-animation: fa-spin 3s infinite linear;
+    -o-animation: fa-spin 3s infinite linear;
+    animation: fa-spin 3s infinite linear;
+}
+
+#config-wrp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #F3F3F3;
+    padding: 32px;
+    z-index: 2;
+    text-align: center;
+}
+
+.fa-window-close-o {
+    position: absolute;
+    top: 12px;
+    right: 12px;
     font-size: 200%;
-    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in 0s;
 }
 
-h3 {
-    font-size: 160%;
+.fa-window-close-o:hover {
+    opacity: 1;
+}
+
+#config-title {
+    display: block;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    border-bottom: 1px solid #000000;
+}
+
+#config-title::before {
+    font-family: 'FontAwesome';
+    font-weight: normal;
+    content: '\f017';
+    margin-right: 4px;
+}
+
+.config-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.config-row:not(:first-of-type) {
+    margin-top: 8px;
+}
+
+.config-row > label {
+    font-size: 120%;
+}
+
+.config-row > input{
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 6px;
+    border: 1px solid #9C9C9C;
+}
+
+#config-submit {
+    margin-top: 20px;
 }
 
 #catender-wrp {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: space-between;
-    height: 100vh;
-    padding: 4%;
+    padding: 0 8%;
 }
 
 #month-hero {
     position: relative;
-    width: 70%;
-    height: 100%;
+    height: 50vh;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -71,22 +132,31 @@ h3 {
 }
 
 #info-wrp {
-    width: 26%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
 }
 
 #info-month {
-    transform: translateY(-100%) rotate(-90deg);
-    transform-origin: bottom right 0;
-    text-align: right;
+    padding: 8px 0;
+    text-align: center;
 }
 
 #info-dates {
-    padding-top: 12px;
-    text-align: right;
+    padding-top: 8px;
+    text-align: left;
     border-top: 1px solid #000000;
+}
+
+#info-today {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#info-today-number {
+    margin-left: 4%;
 }
 
 #info-cal {
@@ -98,4 +168,52 @@ h3 {
     width: calc(100% / 7);
     text-align: center;
     margin-top: 8px;
+}
+
+.info-calDay-outside {
+    color: #A9A9A9;
+}
+
+.info-calDay-today {
+    color: #DC143C;
+    font-weight: bold;
+}
+
+@media screen and (min-width:667px) {
+    #catender-wrp {
+        flex-direction: row;
+        height: 100vh;
+        font-size: 160%;
+        padding: 4%;
+    }
+    
+    #month-hero {
+        width: 70%;
+        height: 100%;
+    }
+    
+    #info-wrp {
+        width: 26%;
+    }
+    
+    #info-month {
+        padding: 4% 0 0;
+        text-align: right;
+        background-color: #FFFFFF;
+        transform: translateY(-100%) rotate(-90deg);
+        transform-origin: bottom right 0;
+    }
+    
+    #info-dates {
+        padding-top: 16px;
+    }
+    
+    #info-today {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #info-today-number {
+        margin-left: 0;
+    }
 }

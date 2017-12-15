@@ -30,6 +30,21 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    font-family: 'Arial';
+    font-size: 8pt;
+}
+h1, h2, h3 {
+    font-family: 'Rubik';
+}
+h1 {
+    font-size: 300%;
+}
+h2 {
+    font-size: 200%;
+    font-weight: bold;
+}
+h3 {
+    font-size: 160%;
 }
 ol, ul {
 	list-style: none;
