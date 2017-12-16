@@ -22,7 +22,9 @@
                         </div>
                         <div class="config-row">
                             <label for="month">Month:</label>
-                            <input name="month" type="number" ng-model="settings.month" />
+                            <select name="month" ng-model="settings.month">
+                                <option ng-repeat="month in ::monthInfoCtrl.monthNames" ng-value="$index">{{::month}}</option>
+                            </select>
                         </div>
                         <div class="config-row">
                             <label for="day">Day:</label>
@@ -48,11 +50,12 @@
         }
         
         function Link (scope, element, attrs, ctrl) {
+            var now = new Date()
             // Bind Properties
             scope.settings = {
-                year: '',
-                month: '',
-                day: ''
+                year: now.getFullYear(),
+                month: now.getMonth(),
+                day: now.getDate()
             }
             scope.showConfig = false
 
@@ -74,14 +77,13 @@
         function MonthInfoController (catendarService) {
             // Bind Properties
             var ctrl = this
-            var lastDayPreviousMonth = 0
-            var lastDayThisMonth = 0
             
             // Public Properties
             ctrl.calendarDays = []
             ctrl.dayNumber = 0
             ctrl.daysOfWeek = catendarService.getDaysOfWeek()
             ctrl.month = ''
+            ctrl.monthNames = catendarService.getMonthNames()
             ctrl.today = null
             ctrl.weekday = ''
             
@@ -102,19 +104,26 @@
             function Load () {
                 catendarService.getTodaysDate()
                 .then(function (response) {
+                    var lastDayPreviousMonth = 0
+                    var lastDayThisMonth = 0
+                    var monthStart = 0
+                    
+                    // Reset
                     ctrl.calendarDays = []
                     ctrl.today = response
 
+                    // Update all the values
                     ctrl.dayNumber = ctrl.today.getDate()
-                    lastDayPreviousMonth = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth(), 0).getDate()
-                    lastDayThisMonth = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth() + 1, 0).getDate()
                     ctrl.month = catendarService.getMonthNameWithIndex(ctrl.today.getMonth())
                     ctrl.weekday = catendarService.getDayOfWeekWithIndex(ctrl.today.getDay())
-
+                    lastDayPreviousMonth = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth(), 0).getDate()
+                    lastDayThisMonth = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth() + 1, 0).getDate()
+                    monthStart = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth(), 1).getDay()
+                    
                     // We need to pre fill the calender with the last days of the previous month.
                     // To do that we need to take what day of the week this month started on and add 1 because JavaScript returns the day beginning with zero.
                     // Subtract that number from the last day of the previous month to determine 
-                    for (let l = lastDayPreviousMonth, i = l - ctrl.today.getDay() + 1; i <= l; i++) {
+                    for (let l = lastDayPreviousMonth, i = l - monthStart; i <= l; i++) {
                         ctrl.calendarDays.push(new CalendarDay(i))
                     }
 
