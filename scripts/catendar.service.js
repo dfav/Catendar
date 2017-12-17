@@ -63,10 +63,9 @@
         function GetTodaysDate () {
             var deferred = $q.defer()
             
-            $http.get('./api/getDate.php')
+            $http.get('./api/getTimecode.php')
                 .then(function (response) {
-                    var parts = response.data.date.split('-')
-                    todaysDate = new Date(parts[0], parts[1] - 1, parts[2])
+                    todaysDate = new Date(response.data.timecode)
                     deferred.resolve(todaysDate)
                 }, function (error) {
                     deferred.reject(error)
