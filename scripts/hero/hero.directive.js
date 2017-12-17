@@ -3,7 +3,7 @@
         .directive('hero', Hero)
     
     function Hero () {
-        HeroController.$inject = ['heroService']
+        HeroController.$inject = ['catendarService']
         
         return {
             controller: HeroController,
@@ -17,7 +17,7 @@
                 </div>`
         }
 
-        function HeroController (heroService) {
+        function HeroController (catendarService) {
             var ctrl = this
             ctrl.heroStyle = {
                 'background-image': 'none'
@@ -25,7 +25,7 @@
             ctrl.quote = ''
             ctrl.quoteAuthor = ''
             
-            heroService.getHeroWithDate()
+            catendarService.getHeroWithDate()
                 .then(function (response) {
                     ctrl.heroStyle['background-image'] = 'url(' + response.heroURL + ')'
                     ctrl.quote = response.quote

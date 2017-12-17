@@ -35,6 +35,7 @@
         this.changeTodaysDate = ChangeTodaysDate
         this.getDaysOfWeek = GetDaysOfWeek
         this.getDayOfWeekWithIndex = GetDayOfWeekWithIndex
+        this.getHeroWithDate = GetHeroWithDate
         this.getMonthNames = GetMonthNames
         this.getMonthNameWithIndex = GetMonthNameWithIndex
         this.getTodaysDate = GetTodaysDate
@@ -50,6 +51,19 @@
         
         function GetDayOfWeekWithIndex (index) {
             return daysOfWeek[index]
+        }
+        
+        function GetHeroWithDate (date) {
+            var deferred = $q.defer()
+            
+            $http.get('./api/getHeroWithDate.php')
+            .then(function (response) {
+                deferred.resolve(response.data)
+            }, function (error) {
+                deferred.reject(error)
+            })
+            
+            return deferred.promise
         }
         
         function GetMonthNames () {
