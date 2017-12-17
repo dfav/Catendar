@@ -1,5 +1,5 @@
 ;(function () {
-    angular.module('catender-app', [])
+    angular.module('catendar-app', [])
     .config(['$compileProvider', function ($compileProvider) {
         $compileProvider.debugInfoEnabled(false)
         $compileProvider.commentDirectivesEnabled(false)

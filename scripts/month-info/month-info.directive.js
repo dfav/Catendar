@@ -1,5 +1,5 @@
 ;(function () {
-    angular.module('catender-app')
+    angular.module('catendar-app')
         .directive('monthInfo', MonthInfo)
     
     function MonthInfo () {

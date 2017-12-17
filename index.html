@@ -13,20 +13,17 @@
         <link rel="stylesheet" href="./media/css/fonts.css">
         <link rel="stylesheet" href="./media/css/site.css">
     </head>
-    <body ng-app="catender-app" ng-cloak>
+    <body ng-app="catendar-app" ng-cloak>
         <div id="catender-wrp">
-            <div id="month-hero" style="background-image: url('./media/images/stock-2.jpg');">
-                <div class="hero-quote">
-                    <span class="hero-quote-msg">"I wish I was a dancing unicorn kitty."</span>
-                    <span class="hero-quote-author">~ Alissa Pulverson</span>
-                </div>
-            </div>
+            <div id="month-hero" hero></div>
             <div id="info-wrp" month-info></div>
         </div>
         <!-- Begin Scripts -->
         <script src="./scripts/angular-1.6.6/angular.js"></script>
-        <script src="./scripts/catender.module.js"></script>
+        <script src="./scripts/catendar.module.js"></script>
         <script src="./scripts/catendar.service.js"></script>
+        <script src="./scripts/hero/hero.service.js"></script>
+        <script src="./scripts/hero/hero.directive.js"></script>
         <script src="./scripts/month-info/month-info.directive.js"></script>
         <!-- Minified production scripts here -->
         <!-- END -->

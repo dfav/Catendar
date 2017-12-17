@@ -1,5 +1,5 @@
 ;(function () {
-    angular.module('catender-app')
+    angular.module('catendar-app')
         .service('catendarService', CatendarService)
     
     CatendarService.$inject = ['$http', '$q']
@@ -29,7 +29,7 @@
             abbreviate: 'S'
         }]
         var monthNames = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
-        var todaysDate = new Date()
+        var todaysDate = null
         
         // Bind public methods
         this.changeTodaysDate = ChangeTodaysDate
@@ -63,7 +63,14 @@
         function GetTodaysDate () {
             var deferred = $q.defer()
             
-            deferred.resolve(todaysDate)
+            $http.get('./api/getDate.php')
+                .then(function (response) {
+                    var parts = response.data.date.split('-')
+                    todaysDate = new Date(parts[0], parts[1] - 1, parts[2])
+                    deferred.resolve(todaysDate)
+                }, function (error) {
+                    deferred.reject(error)
+                })
             
             return deferred.promise
         }
