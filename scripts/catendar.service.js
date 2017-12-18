@@ -76,14 +76,18 @@
 
     function GetTodaysDate () {
       var deferred = $q.defer()
-
-      $http.get('./api/getTimecode.php')
-        .then(function (response) {
-          todaysDate = new Date(response.data.timecode)
-          deferred.resolve(todaysDate)
-        }, function (error) {
-          deferred.reject(error)
-        })
+      
+      if (todaysDate === null) {
+        $http.get('./api/getTimecode.php')
+          .then(function (response) {
+            todaysDate = new Date(response.data.timecode)
+            deferred.resolve(todaysDate)
+          }, function (error) {
+            deferred.reject(error)
+          })
+      } else {
+        deferred.resolve(todaysDate)
+      }
 
       return deferred.promise
     }

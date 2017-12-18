@@ -83,11 +83,11 @@
             lastDayPreviousMonth = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth(), 0).getDate()
             lastDayThisMonth = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth() + 1, 0).getDate()
             monthStart = new Date(ctrl.today.getFullYear(), ctrl.today.getMonth(), 1).getDay()
-
+          
             // We need to pre fill the calender with the last days of the previous month.
             // To do that we need to take what day of the week this month started on and add 1 because JavaScript returns the day beginning with zero.
             // Subtract that number from the last day of the previous month to determine 
-            for (let l = lastDayPreviousMonth, i = l - monthStart; i <= l; i++) {
+            for (let l = lastDayPreviousMonth, i = l - monthStart + 1; i <= l; i++) {
               ctrl.calendarDays.push(new CalendarDay(i))
             }
 
