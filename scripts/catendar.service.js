@@ -53,10 +53,13 @@
       return daysOfWeek[index]
     }
 
-    function GetHeroWithDate (date) {
+    function GetHeroWithDate (date = todaysDate) {
       var deferred = $q.defer()
+      var dateCode = TwoDigits(date.getDate())
+      + TwoDigits(date.getMonth())
+      + date.getFullYear()
 
-      $http.get('./api/getHeroWithDate.php')
+      $http.get('./api/getHeroWithDate.php?date=' + dateCode)
       .then(function (response) {
         deferred.resolve(response.data)
       }, function (error) {
@@ -64,6 +67,10 @@
       })
 
       return deferred.promise
+        
+      function TwoDigits (digit) {
+        return (digit < 10 ? '0' : '') + digit
+      }
     }
 
     function GetMonthNames () {
