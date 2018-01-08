@@ -35,7 +35,7 @@
     this.changeTodaysDate = ChangeTodaysDate
     this.getDaysOfWeek = GetDaysOfWeek
     this.getDayOfWeekWithIndex = GetDayOfWeekWithIndex
-    this.getHeroWithDate = GetHeroWithDate
+    this.getHero = GetHero
     this.getMonthNames = GetMonthNames
     this.getMonthNameWithIndex = GetMonthNameWithIndex
     this.getTodaysDate = GetTodaysDate
@@ -53,13 +53,13 @@
       return daysOfWeek[index]
     }
 
-    function GetHeroWithDate (date = todaysDate) {
+    function GetHero () {
       var deferred = $q.defer()
-      var dateCode = TwoDigits(date.getDate())
-      + TwoDigits(date.getMonth())
-      + date.getFullYear()
+      var dateCode = TwoDigits(todaysDate.getDate())
+      + TwoDigits(todaysDate.getMonth() + 1)
+      + todaysDate.getFullYear()
 
-      $http.get('./api/getHeroWithDate.php?date=' + dateCode)
+      $http.get('./api/getHeroWithDate.php?date=' + dateCode, { cache: true })
       .then(function (response) {
         deferred.resolve(response.data)
       }, function (error) {
@@ -85,7 +85,7 @@
       var deferred = $q.defer()
       
       if (todaysDate === null) {
-        $http.get('./api/getTimecode.php')
+        $http.get('./api/getTimecode.php', { cache: true })
           .then(function (response) {
             todaysDate = new Date(response.data.timecode)
             deferred.resolve(todaysDate)

@@ -141,7 +141,8 @@ input[type=submit] {
 }
 
 .hero-quote-msg, .hero-quote-author {
-  text-shadow: 2px 2px 2px #FFFFFF;
+  color: #CCCCCC;
+  text-shadow: 2px 2px 2px #AAAAAA;
 }
 
 .hero-quote-msg {

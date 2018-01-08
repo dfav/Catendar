@@ -8,34 +8,7 @@
     return {
       controller: MonthInfoController,
       controllerAs: 'monthInfoCtrl',
-      link: Link,
-      scope: {},
       templateUrl: './scripts/month-info/month-info.template.html'
-    }
-
-    function Link (scope, element, attrs, ctrl) {
-      var now = new Date()
-      // Bind Properties
-      scope.settings = {
-        year: now.getFullYear(),
-        month: now.getMonth(),
-        day: now.getDate()
-      }
-      scope.showConfig = false
-
-      // Bind Methods
-      scope.toggleConfig = ToggleConfig
-      scope.updateSettings = UpdateSettings
-
-      function ToggleConfig () {
-        scope.showConfig = !scope.showConfig
-      }
-
-      function UpdateSettings () {
-        ctrl.changeTodaysDate(scope.settings)
-
-        ToggleConfig()
-      }
     }
 
     function MonthInfoController (catendarService) {
@@ -110,6 +83,7 @@
 
       function ChangeTodaysDate (model) {
         catendarService.changeTodaysDate(model)
+        catendarService.getHero()
         Load()
       }
     }

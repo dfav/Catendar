@@ -13,8 +13,30 @@
     <link rel="stylesheet" href="./media/css/fonts.css">
     <link rel="stylesheet" href="./media/css/site.css">
   </head>
-  <body ng-app="catendar-app" ng-cloak>
+  <body ng-app="catendar-app" ng-controller="catendarCtrl" ng-cloak>
     <div id="catender-wrp">
+      <i id="catender-config" class="fa fa-cog" aria-hidden="true" ng-click="toggleConfig()"></i>
+      <div id="config-wrp" ng-if="showConfig">
+        <i class="fa fa-window-close-o" aria-hidden="true" ng-click="toggleConfig()"></i>
+        <h2 id="config-title">SETTINGS</h2>
+        <form name="config" ng-submit="updateSettings()" novalidate>
+          <div class="config-row">
+            <label for="year">Year:</label>
+            <input name="year" type="number" ng-model="settings.year" />
+          </div>
+          <div class="config-row">
+            <label for="month">Month:</label>
+            <select name="month" ng-model="settings.month">
+              <option ng-repeat="month in ::monthInfoCtrl.monthNames" ng-value="$index">{{::month}}</option>
+            </select>
+          </div>
+          <div class="config-row">
+            <label for="day">Day:</label>
+            <input name="day" type="number" ng-model="settings.day" />
+          </div>
+          <input type="submit" id="config-submit" value="Update" />
+        </form>
+      </div>
       <div id="month-hero" hero></div>
       <div id="info-wrp" month-info></div>
     </div>
@@ -22,6 +44,7 @@
     <script src="./scripts/angular-1.6.6/angular.js"></script>
     <script src="./scripts/catendar.module.js"></script>
     <script src="./scripts/catendar.service.js"></script>
+    <script src="./scripts/catendar.controller.js"></script>
     <script src="./scripts/hero/hero.directive.js"></script>
     <script src="./scripts/month-info/month-info.directive.js"></script>
     <!-- Minified production scripts here -->

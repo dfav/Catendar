@@ -8,7 +8,6 @@
     return {
       controller: HeroController,
       controllerAs: 'heroCtrl',
-      scope: {},
       templateUrl: './scripts/hero/hero.template.html'
     }
 
@@ -18,17 +17,26 @@
         'background-image': 'none'
       }
       ctrl.quote = ''
-      ctrl.quoteAuthor = ''
-
-      catendarService.getHeroWithDate()
-        .then(function (response) {
-          ctrl.heroStyle['background-image'] = 'url(' + response.heroURL + ')'
-          ctrl.quote = response.quote
-          ctrl.quoteAuthor = response.quoteAuthor
-        }, function (error) {
-          console.log('Error: unable to retrieve the hero')
-          console.log(error)
+      ctrl.author = ''
+      
+      ctrl.updateHero = UpdateHero
+      
+      catendarService.getTodaysDate()
+        .then(function () {
+          UpdateHero()
         })
+      
+      function UpdateHero () {
+        catendarService.getHero()
+            .then(function (response) {
+              ctrl.heroStyle['background-image'] = 'url(' + response.heroURL + ')'
+              ctrl.quote = response.quote
+              ctrl.author = response.author
+            }, function (error) {
+              console.log('Error: unable to retrieve the hero')
+              console.log(error)
+            })
+      }
     }
   }
 }())

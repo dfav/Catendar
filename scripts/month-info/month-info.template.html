@@ -1,25 +1,3 @@
-<i id="catender-config" class="fa fa-cog" aria-hidden="true" ng-click="toggleConfig()"></i>
-<div id="config-wrp" ng-if="showConfig">
-  <i class="fa fa-window-close-o" aria-hidden="true" ng-click="toggleConfig()"></i>
-  <h2 id="config-title">SETTINGS</h2>
-  <form name="config" ng-submit="updateSettings()" novalidate>
-    <div class="config-row">
-      <label for="year">Year:</label>
-      <input name="year" type="number" ng-model="settings.year" />
-    </div>
-    <div class="config-row">
-      <label for="month">Month:</label>
-      <select name="month" ng-model="settings.month">
-        <option ng-repeat="month in ::monthInfoCtrl.monthNames" ng-value="$index">{{::month}}</option>
-      </select>
-    </div>
-    <div class="config-row">
-      <label for="day">Day:</label>
-      <input name="day" type="number" ng-model="settings.day" />
-    </div>
-    <input type="submit" id="config-submit" value="Update" />
-  </form>
-</div>
 <h2 id="info-month">{{monthInfoCtrl.month}}</h2>
 <div id="info-dates">
   <div id="info-today">
