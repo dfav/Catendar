@@ -8,9 +8,23 @@
     return {
       controller: HeroController,
       controllerAs: 'heroCtrl',
+      link: Link,
       templateUrl: './scripts/hero/hero.template.html'
     }
+    
+    function Link (scope, ele, attr, ctrl) {
+      scope.hasAuthor = HasAuthor
+      scope.hasQuote = HasQuote
 
+      function HasAuthor () {
+        return ctrl.author.length > 0
+      }
+      
+      function HasQuote () {
+        return ctrl.quote.length > 0
+      }
+    }
+    
     function HeroController (catendarService) {
       var ctrl = this
       ctrl.heroStyle = {

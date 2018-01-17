@@ -1,0 +1,27 @@
+{
+  "combineOnSave": false,
+    "combine": [
+      {
+        "output": "dist/site.css",
+        "files": [
+          "media/css/reset.css",
+          "media/css/angular-csp.css",
+          "media/css/font-awesome.css",
+          "media/css/fonts.css",
+          "media/css/site.css"
+        ]
+      },{
+        "output": "dist/site.js",
+        "files": [
+          "scripts/angular-1.6.7/angular.js",
+          "scripts/catendar.module.js",
+          "scripts/catendar.service.js",
+          "scripts/catendar.controller.js",
+          "scripts/hero/hero.directive.js",
+          "scripts/month-info/month-info.directive.js"
+        ]
+      }
+    ]
+}
+
+
